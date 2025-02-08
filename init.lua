@@ -61,6 +61,9 @@ require("lazy").setup({
     -- Tema Nord
     { "shaunsingh/nord.nvim" },
 
+    --Kanagawa theme
+    {"rebelot/kanagawa.nvim"},
+
     -- Font
     { "nvim-tree/nvim-web-devicons" },
 
@@ -81,7 +84,7 @@ vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent
 
 -- Cargar theme
 vim.cmd.colorscheme "nord"
-
+--vim.cmd.colorscheme "kanagawa"
 
 -- Catgar fuente
 require("nvim-web-devicons").setup({})
