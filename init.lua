@@ -87,4 +87,32 @@ vim.cmd.colorscheme "nord"
 --vim.cmd.colorscheme "kanagawa"
 
 -- Catgar fuente
-require("nvim-web-devicons").setup({})
+require("nvim-web-devicons").setup({}) 
+
+--Formateo código
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        -- Formateadores
+        null_ls.builtins.formatting.prettier, -- JavaScript, TypeScript, etc.
+        null_ls.builtins.formatting.black,    -- Python
+        null_ls.builtins.formatting.stylua,   -- Lua
+        null_ls.builtins.formatting.shfmt,    -- Bash
+
+        -- Linters (opcional)
+        null_ls.builtins.diagnostics.eslint,  -- JavaScript, TypeScript
+        null_ls.builtins.diagnostics.flake8,  -- Python
+    },
+})
+
+-- Mapeo para formatear manualmente con <leader>f
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { noremap = true, silent = true })
+
+-- Formatear al guardar
+vim.api.nvim_create_autocmd("BufWritePre", {
+    callback = function()
+        vim.lsp.buf.format({ async = false })
+    end,
+})
+
