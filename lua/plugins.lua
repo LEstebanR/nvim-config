@@ -44,7 +44,6 @@ return {
         nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
         nmap("K", vim.lsp.buf.hover, "Hover Documentation")
         nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-        vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, { noremap = true, silent = true })
       end
       require("mason").setup()
       require("mason-lspconfig").setup({
@@ -95,6 +94,27 @@ return {
     end,
   },
 
+  -- AutoFormateo
+  {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    config = function()
+        require("conform").setup({
+        format_on_save = {
+            timeout_ms = 500,
+            lsp_fallback = true,
+        },
+        formatters_by_ft = {
+            javascript = { "eslint_d" },
+            typescript = { "eslint_d" },
+            javascriptreact = { "eslint_d" },
+            typescriptreact = { "eslint_d" },
+        },
+        })
+    end,
+  },
+
+
   -- Autopairs
   {
     "windwp/nvim-autopairs",
@@ -124,51 +144,6 @@ return {
     end,
   },
 
-  -- Formateo
-{
-  "jose-elias-alvarez/null-ls.nvim",
-  dependencies = { "nvim-lua/plenary.nvim" },
-  config = function()
-    local null_ls = require("null-ls")
-
-    null_ls.setup({
-      sources = {
-        null_ls.builtins.formatting.prettier.with({
-          filetypes = {
-            "javascript",
-            "typescript",
-            "typescriptreact",
-            "javascriptreact",
-            "css",
-            "scss",
-            "html",
-            "json",
-            "yaml",
-            "markdown",
-            "graphql"
-          },
-        }),
-      },
-      on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
-          -- Opcional: puedes quitar esto si ya lo tienes en otro lado
-          vim.keymap.set("n", "<leader>f", function()
-            vim.lsp.buf.format({ async = true })
-          end, { noremap = true, silent = true, buffer = bufnr })
-
-          -- Formatear al guardar
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            callback = function()
-              vim.lsp.buf.format({ async = false })
-            end,
-          })
-        end
-      end,
-    })
-  end,
-},
- 
   -- Git
   {
     "lewis6991/gitsigns.nvim",
@@ -196,14 +171,48 @@ return {
     end,
   },
 
-  -- Tema Nord (asegúrate de que esté arriba en prioridad)
+  -- Tema TokyoNight
   {
-    "shaunsingh/nord.nvim",
-    priority = 1000,
+    "folke/tokyonight.nvim",
+    lazy = false, -- para que se cargue al iniciar
+    priority = 1000, -- asegurarse de que se cargue antes que otros
     config = function()
-      vim.cmd([[colorscheme nord]])
+        vim.cmd.colorscheme("tokyonight") -- activa el tema
     end,
   },
+
+  -- Personalización tema
+  {
+  "folke/tokyonight.nvim",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require("tokyonight").setup({
+      style = "storm", -- cambia entre: "storm", "moon", "night", "day"
+      transparent = true, -- si usas fondo transparente
+      terminal_colors = true,
+      styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
+        functions = { bold = true },
+        variables = {},
+      },
+    })
+
+    vim.cmd.colorscheme("tokyonight")
+  end,
+},
+
+
+
+  -- Tema Nord
+  -- {
+  --   "shaunsingh/nord.nvim",
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd([[colorscheme nord]])
+  --   end,
+  -- },
 
   -- Iconos
   {
@@ -294,6 +303,14 @@ return {
         },
       })
     end,
+  },
+
+  -- Comentarios
+  {
+  'numToStr/Comment.nvim',
+  config = function()
+    require('Comment').setup()
+  end
   },
 }
 

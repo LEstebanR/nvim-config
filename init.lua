@@ -51,3 +51,22 @@ require("lazy").setup("plugins", {
 -- Colorear la guía de indentación para que combine con Nord
 vim.cmd [[highlight IndentBlanklineChar guifg=#4C566A gui=nocombine]]
 
+-- Autoformateo
+require("conform").setup({
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+  formatters_by_ft = {
+  javascript = { "prettier" },
+  typescript = { "prettier" },
+  javascriptreact = { "prettier" },
+  typescriptreact = { "prettier" },
+  json = { "prettier" },
+  css = { "prettier" },
+  html = { "prettier" },
+  markdown = { "prettier" },
+},
+})
+
+
