@@ -5,7 +5,9 @@ vim.o.signcolumn = "yes"               -- Siempre mostrar signcolumn
 vim.o.cursorline = true                -- Resaltar línea actual
 vim.o.termguicolors = true             -- Colores true color
 vim.o.showmode = false                 -- No mostrar modo (lo hace lualine)
-vim.o.wrap = false                     -- No hacer wrap de líneas
+vim.o.wrap = true                      -- Hacer wrap de líneas largas
+vim.o.linebreak = true                   -- Romper líneas en palabras completas
+vim.o.breakindent = true                 -- Mantener indentación en líneas wrapeadas
 vim.o.scrolloff = 8                    -- Mantener 8 líneas al hacer scroll
 vim.o.sidescrolloff = 8                -- Mantener 8 columnas al hacer scroll horizontal
 
