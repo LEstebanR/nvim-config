@@ -46,7 +46,7 @@ vim.o.completeopt = "menu,menuone,noselect"
 vim.cmd([[set shortmess+=c]])
 
 -- Cursor
-vim.o.guicursor = "n-v-c-sm:ver2,i-ci-ve:ver25,r-cr-o:hor20"
+vim.o.guicursor = "n-v-c-sm:block,i-ci-ve:ver25-blinkwait700-blinkoff400-blinkon250,r-cr-o:hor20"
 
 -- Misc
 vim.o.conceallevel = 0

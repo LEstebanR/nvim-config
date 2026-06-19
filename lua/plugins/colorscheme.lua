@@ -25,6 +25,7 @@ return {
           MiniIconsRed       = { fg = "#5c6773" },
           MiniIconsYellow    = { fg = "#5c6773" },
           MiniIconsWhite     = { fg = "#5c6773" },
+          Visual             = { bg = "#3a5a7c", fg = "#e6edf3" },
         },
       })
       vim.cmd.colorscheme("ayu-mirage")
