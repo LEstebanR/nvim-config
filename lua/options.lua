@@ -45,6 +45,9 @@ vim.o.fileencoding = "utf-8"
 vim.o.completeopt = "menu,menuone,noselect"
 vim.cmd([[set shortmess+=c]])
 
+-- Cursor
+vim.o.guicursor = "n-v-c-sm:ver2,i-ci-ve:ver25,r-cr-o:hor20"
+
 -- Misc
 vim.o.conceallevel = 0
 vim.o.laststatus = 3
