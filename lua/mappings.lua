@@ -16,7 +16,7 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 -- Buffers
 keymap("n", "<S-l>", ":bnext<CR>", { desc = "Next buffer" })
 keymap("n", "<S-h>", ":bprev<CR>", { desc = "Prev buffer" })
-keymap("n", "<leader>x", ":bdelete<CR>", { desc = "Close buffer" })
+keymap("n", "<leader>x", function() Snacks.bufdelete() end, { desc = "Close buffer" })
 
 -- Guardar y salir
 keymap("n", "<C-s>", ":w<CR>", { desc = "Save" })

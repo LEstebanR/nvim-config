@@ -59,7 +59,7 @@ return {
 
       quickfile  = { enabled = true },
       bigfile    = { enabled = false },
-      bufdelete  = { enabled = false },
+      bufdelete  = { enabled = true },
       explorer   = { enabled = false },
       git        = { enabled = false },
       gitbrowse  = { enabled = false },

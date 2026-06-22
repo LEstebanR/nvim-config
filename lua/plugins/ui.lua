@@ -16,8 +16,9 @@ return {
     event = "VeryLazy",
     config = function()
       local wk = require("which-key")
-      wk.setup({ preset = "minimal", delay = 300, win = { border = "rounded" } })
+      wk.setup({ preset = "minimal", delay = 200, win = { border = "rounded" } })
       wk.add({
+        { "<leader>c", group = "code" },
         { "<leader>f", group = "find" },
         { "<leader>g", group = "git" },
         { "<leader>h", group = "git hunks" },

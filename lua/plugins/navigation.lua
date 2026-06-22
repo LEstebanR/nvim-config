@@ -45,6 +45,8 @@ return {
       },
       filters = { dotfiles = false },
       git = { enable = true, ignore = false },
+      -- Lo manejamos en lua/autocmds.lua para controlar el layout.
+      hijack_directories = { enable = false },
     },
   },
 }

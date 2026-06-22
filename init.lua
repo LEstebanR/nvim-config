@@ -32,4 +32,7 @@ require("lazy").setup({ { import = "plugins" } }, {
   },
 })
 
+-- Autocomandos (después de lazy: Snacks ya está disponible)
+require("autocmds")
+
 
