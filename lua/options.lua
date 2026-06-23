@@ -35,6 +35,7 @@ vim.o.updatetime = 250
 vim.o.timeoutlen = 500
 vim.o.clipboard = "unnamedplus"
 vim.o.mouse = "a"
+vim.o.autoread = true
 vim.o.backup = false
 vim.o.swapfile = false
 vim.o.undofile = true
