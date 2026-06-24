@@ -1,3 +1,13 @@
+-- Degradado verde -> cian para el header del dashboard (marca Neovim, paleta Ayu Mirage)
+vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+  callback = function()
+    local grad = { "#87d96c", "#7ed784", "#76d59d", "#6dd3b5", "#65d1ce", "#5ccfe6" }
+    for i, color in ipairs(grad) do
+      vim.api.nvim_set_hl(0, "DashGrad" .. i, { fg = color, bold = true })
+    end
+  end,
+})
+
 return {
   {
     "folke/snacks.nvim",
@@ -6,13 +16,6 @@ return {
     opts = {
       dashboard = {
         preset = {
-          header = [[
-  ███╗   ██╗██╗   ██╗██╗███╗   ███╗
-  ████╗  ██║██║   ██║██║████╗ ████║
-  ██╔██╗ ██║██║   ██║██║██╔████╔██║
-  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║
-  ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║
-  ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝]],
           keys = {
             { icon = " ", key = "f", desc = "Find File",    action = ":lua Snacks.dashboard.pick('files')" },
             { icon = " ", key = "n", desc = "New File",     action = ":ene | startinsert" },
@@ -24,7 +27,18 @@ return {
           },
         },
         sections = {
-          { section = "header" },
+          {
+            align = "center",
+            padding = 2,
+            text = {
+              { "███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗\n", hl = "DashGrad1" },
+              { "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║\n", hl = "DashGrad2" },
+              { "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║\n", hl = "DashGrad3" },
+              { "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║\n", hl = "DashGrad4" },
+              { "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║\n", hl = "DashGrad5" },
+              { "╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝", hl = "DashGrad6" },
+            },
+          },
           { section = "keys", gap = 1, padding = 1 },
           { section = "startup" },
         },
