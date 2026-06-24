@@ -30,6 +30,18 @@ return {
             return "<Ignore>"
           end, { expr = true, desc = "Prev hunk" })
 
+          map("n", "<Tab>", function()
+            if vim.wo.diff then return "<Tab>" end
+            vim.schedule(function() gs.next_hunk() end)
+            return "<Ignore>"
+          end, { expr = true, desc = "Next hunk" })
+
+          map("n", "<S-Tab>", function()
+            if vim.wo.diff then return "<S-Tab>" end
+            vim.schedule(function() gs.prev_hunk() end)
+            return "<Ignore>"
+          end, { expr = true, desc = "Prev hunk" })
+
           map("n", "<leader>hs", gs.stage_hunk,                                 { desc = "Stage hunk" })
           map("n", "<leader>hr", gs.reset_hunk,                                 { desc = "Reset hunk" })
           map("n", "<leader>hp", gs.preview_hunk,                               { desc = "Preview hunk" })
