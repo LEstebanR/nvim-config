@@ -4,7 +4,10 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
     config = function()
       require("telescope").setup({
         defaults = {
@@ -18,9 +21,19 @@ return {
             height = 0.80,
           },
           borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+          -- Safety net if it ever falls back to `find`
+          file_ignore_patterns = { "node_modules", "%.git/" },
         },
-        pickers = { find_files = { hidden = true } },
+        pickers = {
+          find_files = {
+            hidden = true,
+            -- fd respects .gitignore; exclude .git even with hidden = true
+            find_command = { "fd", "--type", "f", "--hidden", "--exclude", ".git" },
+          },
+        },
       })
+
+      pcall(require("telescope").load_extension, "fzf")
 
       local b = require("telescope.builtin")
       vim.keymap.set("n", "<leader>ff", b.find_files,  { desc = "Find files" })
