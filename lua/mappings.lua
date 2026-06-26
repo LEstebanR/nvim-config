@@ -21,7 +21,29 @@ keymap("n", "<leader>x", function() Snacks.bufdelete() end, { desc = "Close buff
 -- Guardar y salir
 keymap("n", "<C-s>", ":w<CR>", { desc = "Save" })
 keymap("i", "<C-s>", "<Esc>:w<CR>", opts)
-keymap("n", "<leader>q", ":q<CR>", { desc = "Quit" })
+
+-- Cierra el split actual; si es la última ventana "normal" (sin contar flotantes
+-- ni la barra de NvimTree), borra el buffer en su lugar para que reaparezca el
+-- dashboard en vez de salir de Neovim. Para salir del todo: <leader>Q.
+local function normal_win_count()
+  local count = 0
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_get_config(win).relative == ""
+      and vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "NvimTree"
+    then
+      count = count + 1
+    end
+  end
+  return count
+end
+
+keymap("n", "<leader>q", function()
+  if normal_win_count() > 1 then
+    vim.cmd("q")
+  else
+    Snacks.bufdelete()
+  end
+end, { desc = "Close window / file" })
 keymap("n", "<leader>Q", ":qa<CR>", { desc = "Quit all" })
 keymap("n", "<leader>w", ":w<CR>", { desc = "Save" })
 
